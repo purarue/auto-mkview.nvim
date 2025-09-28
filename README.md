@@ -2,7 +2,7 @@
 
 A simple nvim plugin to automatically save and restore window views (folds, cursor position, etc., see `:help mkview` and `:help viewoptions`) for files as you open and close them.
 
-- sets up `autocmd`s that automatically call `mkview` and `loadview` when you open close files
+- sets up `autocmd`s that automatically call `mkview` and `loadview` when you open/close files
 - ignores `diff` mode, custom `buftype`s
 - can create some mappings, or allow you to customize when this runs
 
