@@ -51,11 +51,11 @@ function M.setup(options)
 
     if M.config.create_mappings then
         vim.keymap.set("n", "ZZ", function()
+            vim.cmd("x") -- default ZZ behaviour, to close and write if modified
             if M.mkview_check() then
                 pcall(vim.cmd.mkview)
             end
-            vim.cmd("x") -- default ZZ behaviour, to close and write if modified
-        end, { noremap = true, nowait = false, desc = "save view and close window" })
+        end, { noremap = true, nowait = false, desc = "save view, write file if modified and close window" })
     end
 
     local group = vim.api.nvim_create_augroup("mkview_check", { clear = true })
