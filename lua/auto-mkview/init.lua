@@ -17,7 +17,7 @@ local did_setup = false
 function M.resolve_config(options)
     M.config = vim.tbl_extend("force", M.config, options or {})
     if M.config.checker ~= nil and type(M.config.checker) ~= "function" then
-        vim.notify("checker should be a function that returns a boolean", vim.log.levels.WARN, { title = "mkview" })
+        vim.notify("checker should be a function that returns a boolean", vim.log.levels.WARN, { title = "auto-mkview" })
         M.config.checker = nil
     end
 end
