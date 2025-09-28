@@ -1,22 +1,24 @@
-*auto-mkview.nvim.txt*     For NVIM v0.12.0     Last change: 2025 September 27
+*auto-mkview.txt*        For NVIM v0.12.0       Last change: 2025 September 27
 
 ==============================================================================
-Table of Contents                         *auto-mkview.nvim-table-of-contents*
+Table of Contents                              *auto-mkview-table-of-contents*
 
-1. mkview.nvim                                  |auto-mkview.nvim-mkview.nvim|
-  - Configuration                 |auto-mkview.nvim-mkview.nvim-configuration|
+1. mkview.nvim                                       |auto-mkview-mkview.nvim|
+  - Configuration                      |auto-mkview-mkview.nvim-configuration|
 
 ==============================================================================
-1. mkview.nvim                                  *auto-mkview.nvim-mkview.nvim*
+1. mkview.nvim                                       *auto-mkview-mkview.nvim*
 
-A simple Neovim plugin to automatically save and restore window views (folds,
-cursor position, etc.) for files as you open and close them.
+A simple nvim plugin to automatically save and restore window views (folds,
+cursor position, etc., see `:help mkview` and `:help viewoptions`) for files as
+you open and close them.
 
-- sets up autocmds that automatically call `mkview` and `loadview` when you open close files
+- sets up `autocmd`s that automatically call `mkview` and `loadview` when you open close files
 - ignores `diff` mode, custom `buftype`s
+- can create some mappings, or allow you to customize when this runs
 
 
-CONFIGURATION                     *auto-mkview.nvim-mkview.nvim-configuration*
+CONFIGURATION                          *auto-mkview-mkview.nvim-configuration*
 
 I would recommend setting the following in your config:
 
@@ -32,10 +34,10 @@ To install with `lazy.nvim` <https://github.com/folke/lazy.nvim>
     {
         "purarue/mkview.nvim",
         event = "BufWinEnter",
-        -- these are the default values
         ---@module 'auto-mkview'
         ---@type AutoMkview.Config?
         opts = {
+            -- these are the default values
             create_mappings = false, -- override the 'ZZ' mapping to mkview as well
             checker = nil,
         },
@@ -49,7 +51,7 @@ Canpass `checker` function which returns a boolean, as an additional filter:
         create_mappings = true, -- Enable ZZ mapping to save view
         checker = function(opts)
             -- Custom logic to decide if mkview should be called
-            -- e.g. only do this for my personal notes directory
+            -- e.g., only do this for my personal notes directory
             return opts.bufname:match("/notes/.*%.md$")
         end,
     }
