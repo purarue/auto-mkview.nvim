@@ -1,4 +1,4 @@
-# mkview.nvim
+## auto-mkview.nvim
 
 A simple nvim plugin to automatically save and restore window views (folds, cursor position, etc., see `:help mkview` and `:help viewoptions`) for files as you open and close them.
 
@@ -32,7 +32,9 @@ To install with [`lazy.nvim`](https://github.com/folke/lazy.nvim):
 }
 ```
 
-Can pass `checker` function which returns a boolean, as an additional filter:
+## Advanced
+
+You can pass a `checker` function to specify when to `mkview`:
 
 ```lua
 {
