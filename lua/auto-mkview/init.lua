@@ -5,10 +5,12 @@ local M = {}
 
 ---@class (exact) AutoMkview.Config
 ---@field checker? fun(checker_opts: AutoMkview.CheckerOptions):boolean additional function to be called during setup
----@field create_mappings boolean whether to save view on additional mappings
+---@field create_mappings? boolean whether to save view on additional mappings
+---@field disabled_fts? string[] list of filetypes to disable auto mkview for
 M.config = {
     checker = nil,
     create_mappings = false,
+    disabled_fts = {},
 }
 
 local did_setup = false
@@ -20,11 +22,19 @@ function M.resolve_config(options)
         vim.notify("checker should be a function that returns a boolean", vim.log.levels.WARN, { title = "auto-mkview" })
         M.config.checker = nil
     end
+    if vim.islist(M.config.disabled_fts) == false then
+        vim.notify("disabled_fts should be a list of strings", vim.log.levels.WARN, { title = "auto-mkview" })
+        M.config.disabled_fts = {}
+    end
 end
 
 ---Check if mkview should be called
 function M.mkview_check()
     if vim.wo.diff or vim.bo.buftype ~= "" then
+        return false
+    end
+
+    if vim.tbl_contains(M.config.disabled_fts, vim.bo.filetype) then
         return false
     end
 

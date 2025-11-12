@@ -28,6 +28,7 @@ To install with [`lazy.nvim`](https://github.com/folke/lazy.nvim):
         -- these are the default values
         create_mappings = false, -- override the 'ZZ' mapping to mkview as well
         checker = nil,
+        disabled_fts = {}, -- list of filetypes to disable auto mkview for
     },
 }
 ```
@@ -39,6 +40,7 @@ You can pass a `checker` function to specify when to `mkview`:
 ```lua
 {
     create_mappings = true, -- Enable ZZ mapping to save view
+    disabled_fts = { "gitcommit", "gitrebase" },
     checker = function(opts)
         -- Custom logic to decide if mkview should be called
         -- e.g., only do this for my personal notes directory
