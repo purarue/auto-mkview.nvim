@@ -72,7 +72,9 @@ function M.setup(options)
     vim.api.nvim_create_autocmd("BufWinEnter", {
         pattern = "?*",
         callback = function()
-            pcall(vim.cmd.loadview)
+            if M.mkview_check() then
+                pcall(vim.cmd.loadview)
+            end
         end,
         group = group,
         desc = "Load view when entering a buffer window",
