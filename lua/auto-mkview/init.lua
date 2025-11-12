@@ -28,7 +28,7 @@ function M.resolve_config(options)
     end
 end
 
----Check if mkview should be called
+--- Check if mkview should be called
 function M.mkview_check()
     if vim.wo.diff or vim.bo.buftype ~= "" then
         return false
