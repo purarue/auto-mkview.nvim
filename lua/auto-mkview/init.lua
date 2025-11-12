@@ -59,7 +59,7 @@ function M.setup(options)
 
     M.resolve_config(options)
 
-    if M.config.create_mappings then
+    if M.config.create_mappings == true then
         vim.keymap.set("n", "ZZ", function()
             vim.cmd("x") -- default ZZ behaviour, to close and write if modified
             if M.mkview_check() then
